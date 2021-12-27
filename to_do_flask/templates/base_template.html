@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/app.css') }}">
+    <link rel="icon" href="{{ url_for('static',filename='images/icon.png') }}" type="image/icon type">
+    <title>TODO!</title>
+</head>
+
+<body>
+    <header class="sticky">
+        <a href="/" class="logo">ToDo App</a>
+        <a href="{{ url_for('page_views.tasks') }}" class="button">Tasks</a>
+        <a href="{{ url_for('page_views.add_task_form') }}" class="button">Add Task</a>
+        <a href="{{ url_for('page_views.users') }}" class="button">Users</a>
+        <a href="{{ url_for('page_views.add_user_form') }}" class="button">Add User</a>
+    </header>
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+</body>
+
+</html>

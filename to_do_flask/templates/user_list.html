@@ -1,0 +1,31 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    {% for user in user_list.users %}
+        <div class="button-group">
+            <a href="{{url_for('page_views.single_user', user_id=user.user_id)}}" role="button">
+                <button class="tertiary" type="submit">{{ user.username }}</button>
+            </a>
+            <label class="button" for="modal-control">
+                <button class="primary" type="submit">Change username</button>
+            </label>
+            <input type="checkbox" id="modal-control" class="modal">
+            <div>
+                <div class="card">
+                    <label for="modal-control" class="modal-close"></label>
+                    <h3 class="section">{{ user.username }}</h3>
+                    <p>Change username to</p>
+                    <form class="button" action="{{ url_for('page_views.update_user') }}" method="post" id="update">
+                        <input type="hidden" name="user_id" value="{{ user.user_id }}">
+                        <input type="text" name="username" placeholder="Enter new username...">
+                        <button class="secondary" type="submit">Change</button>
+                    </form>
+                </div>
+            </div>
+            <form class="button" action="{{ url_for('page_views.delete_user') }}" method="post" id="delete">
+                <input type="hidden" name="user_id" value="{{ user.user_id }}">
+                <button class="secondary" type="submit">Delete</button>
+            </form>
+        </div>
+    {% endfor %}
+{% endblock content %}

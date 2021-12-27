@@ -1,0 +1,12 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <div class="collapse">
+        {% for task in task_list.tasks %}
+            {% with current_page = {'url': url_for('page_views.tasks'), 'name': 'task_list'} %}
+                {% include 'task.html' %}
+                {% block item %}{% endblock item %}
+            {% endwith %}
+        {% endfor %}
+    </div>
+{% endblock content %}

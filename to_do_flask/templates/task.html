@@ -1,0 +1,46 @@
+{% block item %}
+<div class="collapse">
+    <input type="radio" id="accordion-{{task.task_id}}" checked aria-hidden="true" name="accordion">
+    <label for="accordion-{{task.task_id}}" aria-hidden="true">
+        {% if task.completed == False %}
+            <span class="tooltip" aria-label="Uncompleted task">
+                <mark class="secondary">{{ task.task }}</mark>
+            </span>
+        {% else %}
+            <span class="tooltip" aria-label="Completed task">
+                <mark class="tertiary">{{ task.task }}</mark>
+            </span>
+        {% endif %}
+    </label>
+    <div>
+        <p>Task for the next users:</p>
+        <ul>
+            {% for username in task.username %}
+            <li>{{ username }}</li>
+            {% endfor %}
+        </ul>
+        <p>Must be done till {{task.deadline}}.</p>
+        <div class="button-group">
+            {% if current_page.name == 'single_user' %}
+                <form class="button" action="{{ url_for('page_views.delete_task_user') }}" method="post" id="delete">
+                    <input type="hidden" name="task_id" value="{{ task.task_id }}">
+                    <input type="hidden" name="user_id" value="{{ user.user_id }}">
+                    <input type="hidden" name="current_page" value="{{ current_page.url }}">
+                    <button class="inverse small" type="submit">Delete for current user</button>
+                </form>
+            {% else %}
+                <form class="button" action="{{ url_for('page_views.complete_task') }}" method="post" id="complete">
+                    <input type="hidden" name="task_id" value="{{ task.task_id }}">
+                    <input type="hidden" name="current_page" value="{{ current_page.url }}">
+                    <button class="primary small" type="submit">Mark completed</button>
+                </form>
+                <form class="button" action="{{ url_for('page_views.delete_task') }}" method="post" id="delete">
+                    <input type="hidden" name="task_id" value="{{ task.task_id }}">
+                    <input type="hidden" name="current_page" value="{{ current_page.url }}">
+                    <button class="inverse small" type="submit">Delete</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock item %}

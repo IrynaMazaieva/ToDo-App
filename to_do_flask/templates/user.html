@@ -1,0 +1,19 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+<h1>{{ user.username }}'s tasks:</h1>
+
+<div class="collapse">
+    {% if user.tasks %}
+        {% for task in user.tasks %}
+            {% with current_page = {'url': url_for('page_views.single_user', user_id=user.user_id), 'name': 'single_user'} %}
+                {% include "task.html" %}
+                {% block item %}{% endblock item %}
+            {% endwith %}
+        {% endfor %}
+    {% else %}
+        <p>Ooops... There is no task yet.</p>
+    {% endif %}
+</div>
+
+{% endblock content %}

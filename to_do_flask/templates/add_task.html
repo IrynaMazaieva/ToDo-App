@@ -1,0 +1,26 @@
+{% extends "base_template.html" %}
+
+
+{% block content %}
+    <form class="ui form" action="{{ url_for('page_views.add_task') }}" method="post">
+        <strong>New task:</strong>
+        <div class="input-group vertical">
+            <label for="task">
+                Task
+                <input type="text" id="task" name="task" placeholder="Task name..."/>
+            </label>
+            <label for="deadline">
+                Deadline
+                <input type="datetime-local" id="deadline" name="deadline"/>
+            </label>
+                <legend>Users</legend>
+                {% for user in user_list.users %}
+                    <label for="usernames[]">
+                        <input type="checkbox" id="usernames[]" name="usernames[]" value="{{ user.username }}">
+                        {{ user.username }}
+                    </label>
+                {% endfor %}
+        </div>
+        <button class="primary" type="submit">Add</button>
+    </form>
+{% endblock content %}
