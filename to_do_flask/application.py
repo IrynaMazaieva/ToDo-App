@@ -68,4 +68,4 @@ def create_app(db_uri: str) -> Flask:
 
 
 if __name__ == "__main__":
-    create_app('sqlite:///./todo_app.bd').run(debug=True)
+    create_app('sqlite:///./db.sqlite3').run(debug=True)
