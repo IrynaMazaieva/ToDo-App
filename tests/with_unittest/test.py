@@ -1,12 +1,12 @@
 import unittest
 from typing import List
-from to_do_flask.tests.base_test import BaseCase
+from with_unittest.base_test import BaseCase
 from to_do_flask.utils import bytes_to_json
 
 
 class ToDoAppTestCase(BaseCase):
 
-    def test_add_user(self):
+    def test_user(self):
         """
         test user's base API (CRUD)
         """
@@ -58,7 +58,7 @@ class ToDoAppTestCase(BaseCase):
         assert 'status' in delete_data_json, f'Something went wrong:\n{delete_data_json}'
         assert delete_data_json['status'] == 'OK'
 
-    def test_get_task_list(self):
+    def test_task(self):
         """
         test task's base API (CRUD)
         """
